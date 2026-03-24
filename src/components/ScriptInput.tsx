@@ -1,4 +1,22 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function ScriptInput() {
+  const [script, setScript] = useState("");
+  const router = useRouter();
+
+  const handleAnalyse = () => {
+    if (!script.trim()) return;
+
+    // save to session storage so the next page can pick it up
+    sessionStorage.setItem("presentation_script", script);
+
+    // navigate to the split view results page
+    router.push("/analyse");
+  };
+
   return (
     <main className="mx-auto max-w-2xl px-6 py-16">
       <div className="text-center mb-10">
@@ -20,6 +38,8 @@ export default function ScriptInput() {
         </label>
         <textarea
           id="script-input"
+          value={script}
+          onChange={(e) => setScript(e.target.value)}
           rows={8}
           placeholder="e.g. Good morning everyone, today I'd like to talk about the future of renewable energy..."
           className="w-full rounded-lg border border-border bg-white px-4 py-3 text-text placeholder:text-text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition resize-none"
@@ -29,6 +49,8 @@ export default function ScriptInput() {
             Tip: Include your full script for the best analysis.
           </span>
           <button
+            onClick={handleAnalyse}
+            disabled={!script.trim()}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg

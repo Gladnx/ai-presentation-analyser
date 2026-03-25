@@ -124,8 +124,8 @@ export default function ScriptInput() {
       style: isIntroComplete
         ? undefined
         : {
-            transitionDelay: `${delay}ms`,
-          },
+          transitionDelay: `${delay}ms`,
+        },
     };
   };
 
@@ -205,7 +205,6 @@ export default function ScriptInput() {
         : "pending";
   const heroReveal = getRevealClass(0, "fade");
   const titleReveal = getRevealClass(80, "rise");
-  const copyReveal = getRevealClass(180, "fade");
   const cardReveal = getRevealClass(240, "card");
   const headerReveal = getRevealClass(320, "fade");
   const uploadReveal = getRevealClass(380, "fade");
@@ -225,25 +224,35 @@ export default function ScriptInput() {
           style={titleReveal.style}
         >
           <span
-            className={`inline-block font-cursive text-text mr-3 tracking-normal ${
-              isAnimatedIn ? "animate-hero-soft-reveal" : "opacity-0"
-            }`}
+            className={`inline-block font-cursive text-text mr-3 tracking-normal ${isAnimatedIn ? "animate-hero-soft-reveal" : "opacity-0"
+              }`}
           >
             Present with
           </span>
           <span
-            className={`inline-block ${
-              isAnimatedIn ? "animate-hero-accent-reveal" : "opacity-0"
-            }`}
+            className={`inline-block ${isAnimatedIn ? "animate-hero-accent-reveal" : "opacity-0"
+              }`}
           >
             <span className="animate-text-shimmer font-black">CONFIDENCE</span>
           </span>
         </h1>
         <p
-          className={`text-text-muted text-sm max-w-lg mx-auto leading-relaxed ${copyReveal.className}`}
-          style={copyReveal.style}
+          className={`text-text-muted text-sm max-w-lg mx-auto leading-relaxed ${
+            isAnimatedIn ? "animate-hero-copy-reveal" : "opacity-0"
+          }`}
         >
-          The AI powered coach that will help you perfect your script, predict audience questions and answers, and master your presentation mood.
+          Your AI presentation coach for your{" "}
+          <span className="font-bold text-primary">
+            Lancaster student journey
+          </span>
+          , that will help you perfect your{" "}
+          <span className="font-bold text-primary">presentation script</span>,{" "}
+          <span className="font-bold text-primary">recommend improvements</span>,
+          {" "}and{" "}
+          <span className="font-bold text-primary">
+            predict audience questions and answers
+          </span>{" "}
+          to master your presentation.
         </p>
       </div>
 
@@ -396,8 +405,8 @@ export default function ScriptInput() {
 
             <div
               className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-[11px] ${fileError
-                  ? "text-red-600 dark:text-red-400"
-                  : "text-text-muted"
+                ? "text-red-600 dark:text-red-400"
+                : "text-text-muted"
                 }`}
             >
               <UploadStepIcon state={extractionStepState} />

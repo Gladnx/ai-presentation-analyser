@@ -74,20 +74,20 @@ export default function AnalysePage() {
   if (!script) return null;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-mesh flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8 flex flex-col lg:flex-row gap-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8 flex flex-col lg:flex-row gap-8 animate-fade-in-up">
         {/* Left Column: Script View/Edit */}
         <div className="flex-1 flex flex-col lg:border-r border-border lg:pr-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-text">Your Script</h2>
+            <h2 className="text-xl font-bold text-text uppercase tracking-widest text-sm">Your Script</h2>
             <div className="flex items-center gap-3">
               {!isEditing ? (
                 <>
                   <button
                     onClick={handleEditToggle}
-                    className="text-sm font-medium text-text-muted hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-surface border border-transparent hover:border-border"
+                    className="text-xs font-bold text-text-muted hover:text-primary transition-colors px-4 py-2 rounded-xl hover:bg-surface border border-transparent hover:border-border uppercase tracking-wider"
                   >
                     Edit Script
                   </button>
@@ -96,9 +96,9 @@ export default function AnalysePage() {
                       sessionStorage.removeItem("presentation_script");
                       router.push("/");
                     }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-br from-red-600 to-orange-500 px-4 py-2 text-sm font-medium text-white hover:from-red-700 hover:to-orange-600 transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:ring-offset-2 dark:border dark:border-red-500 shadow-sm"
+                    className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 px-5 py-2.5 text-xs font-black text-white hover:scale-[1.02] transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 shadow-lg shadow-red-500/20 animate-shimmer uppercase tracking-widest"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>
                     New Analysis
@@ -108,14 +108,14 @@ export default function AnalysePage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleEditToggle}
-                    className="text-sm font-medium text-text-muted hover:text-text px-3 py-2 transition-colors"
+                    className="text-xs font-bold text-text-muted hover:text-text px-4 py-2 transition-colors uppercase tracking-wider"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleReAnalyse}
                     disabled={loading || !editedScript.trim()}
-                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-xs font-black text-white hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50 shadow-lg shadow-primary/20 animate-shimmer uppercase tracking-widest"
                   >
                     {loading ? "Analysing..." : "Re-analyse"}
                   </button>
@@ -129,11 +129,11 @@ export default function AnalysePage() {
               <textarea
                 value={editedScript}
                 onChange={(e) => setEditedScript(e.target.value)}
-                className="flex-1 w-full bg-surface border border-primary rounded-xl p-6 text-text focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none leading-relaxed shadow-inner"
+                className="flex-1 w-full glass border border-primary/30 rounded-2xl p-8 text-text focus:outline-none focus:ring-4 focus:ring-primary/5 resize-none leading-relaxed shadow-xl text-lg transition-all"
                 placeholder="Edit your script here..."
               />
             ) : (
-              <div className="flex-1 bg-surface border border-border rounded-xl p-6 overflow-y-auto text-text-muted whitespace-pre-wrap leading-relaxed shadow-inner">
+              <div className="flex-1 glass border border-border/50 rounded-2xl p-8 overflow-y-auto text-text-muted whitespace-pre-wrap leading-relaxed shadow-xl text-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent transition-all hover:border-border">
                 {script}
               </div>
             )}
@@ -141,39 +141,42 @@ export default function AnalysePage() {
         </div>
 
         {/* Right Column: Results */}
-        <div className="flex-1 flex flex-col gap-6 lg:pl-4">
-          <h2 className="text-xl font-semibold text-text mb-2">Analysis Results</h2>
+        <div className="flex-1 flex flex-col gap-8 lg:pl-4">
+          <h2 className="text-xl font-bold text-text mb-2 uppercase tracking-widest text-sm">Analysis Results</h2>
 
           {loading && !isEditing ? (
-            <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] text-text-muted gap-4">
-              <div className="w-10 h-10 border-4 border-border border-t-primary rounded-full animate-spin"></div>
-              <p className="animate-pulse">Analysing your presentation...</p>
+            <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] text-text-muted gap-6 glass rounded-2xl border border-border/50">
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 border-4 border-primary/10 rounded-full"></div>
+                <div className="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
+              </div>
+              <p className="animate-pulse font-bold tracking-widest text-xs uppercase text-primary/80">Analysing Presence...</p>
             </div>
           ) : error ? (
-            <div className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-900 rounded-xl p-6 text-red-600 dark:text-red-400 flex flex-col items-center justify-center min-h-[400px] gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              <p className="font-medium text-center">{error}</p>
+            <div className="glass border border-red-500/20 rounded-2xl p-8 text-red-600 dark:text-red-400 flex flex-col items-center justify-center min-h-[400px] gap-6 shadow-xl">
+              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <p className="font-bold text-center tracking-wide">{error}</p>
               <button
                 onClick={() => performAnalysis(editedScript || script || "")}
-                className="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                className="px-6 py-3 bg-red-600 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-red-500/20 active:scale-95"
               >
                 Try Again
               </button>
             </div>
           ) : result ? (
-            <div className={loading ? "opacity-50 pointer-events-none transition-opacity" : "transition-opacity"}>
+            <div className={`space-y-8 ${loading ? "opacity-40 pointer-events-none grayscale-[0.5] transition-all duration-500" : "transition-all duration-500"}`}>
               {/* score and mood */}
-              <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-2 gap-6">
                 <ScoreCard score={result.score} />
                 <MoodBadge mood={result.mood} />
               </div>
 
               {/* suggestions */}
-              <div className="mb-6">
-                <ImprovementList items={result.improvements} />
-              </div>
+              <ImprovementList items={result.improvements} />
 
               {/* questions */}
               <QuestionList questions={result.questions} />

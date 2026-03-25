@@ -24,56 +24,67 @@ export default function ScriptInput() {
   };
 
   return (
-    <main className="flex-1 mx-auto max-w-2xl px-6 py-8 flex flex-col justify-center">
-      <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-text tracking-tight">
-          Analyse your presentation script
+    <main className="w-full max-w-2xl flex flex-col justify-center">
+      <div className="text-center mb-6">
+        <h1 className="text-4xl md:text-5xl font-black text-text tracking-tight mb-2 flex flex-col sm:block">
+          <span className="font-cursive text-text mr-3 tracking-normal">Present with</span>
+          <span className="animate-text-shimmer font-black">CONFIDENCE</span>
         </h1>
-        <p className="mt-3 text-text-muted text-lg">
-          Paste your script below and get an AI powered score, mood analysis,
-          improvement tips, and predicted audience questions.
+        <p className="text-text-muted text-sm max-w-lg mx-auto leading-relaxed">
+          The AI powered coach that will help you perfect your script, predict audience questions and answers, and master your presentation mood.
         </p>
       </div>
 
-      <div className="rounded-xl border border-border bg-surface p-6">
-        <div className="flex items-center justify-between mb-2">
+      <div className="glass rounded-2xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5">
+        <div className="flex items-center justify-between mb-3">
           <label
             htmlFor="script-input"
-            className="block text-sm font-medium text-text"
+            className="block text-[10px] font-semibold text-text-muted/80 uppercase tracking-[0.25em] ml-1"
           >
-            Your script
+            Your Script
           </label>
           <button
             onClick={handleSampleScript}
-            className="text-xs font-semibold py-1 px-3 rounded-md bg-secondary text-secondary-foreground border border-border hover:bg-border transition-colors cursor-pointer"
+            className="text-[10px] uppercase tracking-widest font-black py-1.5 px-3 rounded-md bg-surface-alt text-text-muted border border-border hover:border-primary/40 hover:text-primary transition-all cursor-pointer"
           >
             Insert a sample script
           </button>
         </div>
-        <textarea
-          id="script-input"
-          value={script}
-          onChange={(e) => setScript(e.target.value)}
-          rows={8}
-          placeholder="e.g. Good morning everyone, today I'd like to talk about the future of renewable energy..."
-          className="w-full rounded-lg border border-border bg-surface-alt px-4 py-3 text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition resize-none"
-        />
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-xs text-text-muted">
-            Tip: Include your full script for the best analysis.
-          </span>
+
+        <div className="relative group">
+          <textarea
+            id="script-input"
+            value={script}
+            onChange={(e) => setScript(e.target.value)}
+            rows={5}
+            placeholder="e.g. Good morning everyone, today I'd like to talk about..."
+            className="w-full rounded-xl border border-border bg-surface-alt/50 px-5 py-4 text-text placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none leading-relaxed text-sm"
+          />
+        </div>
+
+        <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-text-muted">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-primary/60" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            </svg>
+            <span className="text-[10px] font-bold italic uppercase tracking-wider opacity-60">
+              Pro tip: Scripts over 200 words get deeper insights.
+            </span>
+          </div>
+
           <button
             onClick={handleAnalyse}
             disabled={!script.trim()}
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-br from-red-600 to-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:from-red-700 hover:to-orange-600 transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:border dark:border-red-500"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 px-8 py-3 text-xs font-black text-white hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 disabled:opacity-50 disabled:cursor-not-allowed dark:border dark:border-red-400 shadow-lg shadow-red-500/20 animate-shimmer tracking-widest"
           >
+            <span>ANALYSE SCRIPT</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={3}
             >
               <path
                 strokeLinecap="round"
@@ -81,7 +92,6 @@ export default function ScriptInput() {
                 d="M13 10V3L4 14h7v7l9-11h-7z"
               />
             </svg>
-            Analyse
           </button>
         </div>
       </div>

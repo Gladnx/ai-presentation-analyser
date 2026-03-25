@@ -11,8 +11,8 @@ export default function ImprovementList({ items }: { items: string[] }) {
       </h3>
       <ul className="space-y-3">
         {items.map((item, idx) => (
-          <li key={idx} className="flex gap-3 text-text-muted bg-white p-4 rounded-lg border border-border/50 shadow-sm">
-            <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary-light text-primary font-bold text-sm">
+          <li key={idx} className="flex gap-3 text-text-muted bg-surface-alt p-4 rounded-lg border border-border">
+            <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary-light text-primary font-bold text-sm dark:bg-red-600 dark:border dark:border-red-500 dark:text-white">
               {idx + 1}
             </span>
             <span>{item}</span>

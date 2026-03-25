@@ -1,16 +1,37 @@
 export default function ScoreCard({ score }: { score: number }) {
-  const getColorClass = () => {
-    if (score >= 8) return "text-green-600 border-green-200 bg-green-50";
-    if (score >= 5) return "text-yellow-600 border-yellow-200 bg-yellow-50";
-    return "text-red-600 border-red-200 bg-red-50";
+  const getThemeClasses = () => {
+    if (score >= 8) return {
+      text: "text-green-600 dark:text-white",
+      border: "border-green-500",
+      bg: "bg-green-100 dark:bg-linear-to-br dark:from-green-600 dark:to-green-700",
+      ring: "border-green-200 dark:border-green-500/50"
+    };
+    if (score >= 5) return {
+      text: "text-yellow-600 dark:text-white",
+      border: "border-yellow-500",
+      bg: "bg-yellow-100 dark:bg-linear-to-br dark:from-yellow-600 dark:to-yellow-700",
+      ring: "border-yellow-200 dark:border-yellow-500/50"
+    };
+    return {
+      text: "text-red-600 dark:text-white",
+      border: "border-red-500",
+      bg: "bg-red-100 dark:bg-linear-to-br dark:from-red-600 dark:to-red-700",
+      ring: "border-red-200 dark:border-red-500/50"
+    };
   };
+
+  const theme = getThemeClasses();
 
   return (
     <div className="rounded-xl border border-border bg-surface p-6 flex flex-col items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-      <h3 className="text-sm font-medium text-text-muted mb-2 uppercase tracking-wider">Overall Score</h3>
-      <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center ${getColorClass()} transition-colors`}>
-        <span className="text-4xl font-bold">{score}</span>
-        <span className="text-lg opacity-50 ml-1">/10</span>
+      <h3 className="text-xs font-bold text-text-muted mb-4 uppercase tracking-[0.2em]">Overall Score</h3>
+      <div className={`relative w-28 h-28 rounded-full border-2 ${theme.ring} flex items-center justify-center transition-all duration-500`}>
+        <div className={`w-22 h-22 rounded-full border-2 ${theme.border} ${theme.bg} flex flex-col items-center justify-center shadow-lg`}>
+          <div className="flex items-baseline leading-none">
+            <span className={`text-4xl font-black ${theme.text}`}>{score}</span>
+            <span className={`text-sm font-bold ml-0.5 ${theme.text} opacity-70`}>/10</span>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -11,8 +11,10 @@ export default function QuestionList({ questions }: { questions: string[] }) {
       </h3>
       <ul className="space-y-3">
         {questions.map((q, idx) => (
-          <li key={idx} className="flex gap-3 text-text-muted bg-white p-4 rounded-lg border border-border/50 shadow-sm group hover:border-primary/30 transition-colors">
-            <span className="text-primary mt-0.5 opacity-70 group-hover:opacity-100 transition-opacity">?</span>
+          <li key={idx} className="flex gap-3 text-text-muted bg-surface-alt p-4 rounded-lg border border-border group hover:border-primary/30 transition-colors">
+            <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-primary-light text-primary font-bold text-sm mt-0.5 dark:bg-red-600 dark:border dark:border-red-500 dark:text-white">
+              {idx + 1}
+            </span>
             <span>{q}</span>
           </li>
         ))}

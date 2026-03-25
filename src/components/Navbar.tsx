@@ -1,16 +1,22 @@
+import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
+
 export default function Navbar() {
   return (
-    <nav className="border-b border-border">
-      <div className="w-full px-35 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+    <nav className="border-b border-border bg-surface/50 backdrop-blur-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
+        >
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-orange-500 flex items-center justify-center shadow-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={2.5}
             >
               <path
                 strokeLinecap="round"
@@ -19,10 +25,11 @@ export default function Navbar() {
               />
             </svg>
           </div>
-          <span className="text-lg font-semibold text-text">
+          <span className="text-lg font-bold text-text tracking-tight">
             Presentation Analyser
           </span>
-        </div>
+        </Link>
+        <ThemeToggle />
       </div>
     </nav>
   );

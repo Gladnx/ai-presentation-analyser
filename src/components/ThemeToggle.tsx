@@ -16,7 +16,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-surface border border-border text-text-muted hover:text-text hover:bg-border focus:outline-none focus:ring-2 focus:ring-primary/40"
+      className="p-2 rounded-lg bg-surface border border-border text-text-muted hover:text-text hover:bg-border transition-none focus:outline-none focus:ring-2 focus:ring-primary/40"
       aria-label="Toggle dark mode"
       suppressHydrationWarning
     >

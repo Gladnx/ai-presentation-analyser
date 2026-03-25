@@ -131,6 +131,20 @@ body {
   min-height: 100vh;
 }
 
+body,
+nav,
+.glass,
+input,
+textarea,
+button,
+[class*="border-"],
+[class*="bg-"],
+[class*="text-"] {
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: 160ms;
+  transition-timing-function: ease;
+}
+
 /* Fade-in animation for result cards */
 @keyframes fadeInUp {
   from {
@@ -180,38 +194,35 @@ body {
   }
 }
 
-@keyframes typePresent {
+@keyframes heroSoftReveal {
   from {
-    width: 0;
-    opacity: 1;
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(8px);
   }
 
   to {
-    width: 12ch;
     opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }
 
-@keyframes typeConfidence {
+@keyframes heroAccentReveal {
   from {
-    width: 0;
-    opacity: 1;
-  }
-
-  to {
-    width: 10.5ch;
-    opacity: 1;
-  }
-}
-
-@keyframes caretFade {
-  0%,
-  85% {
-    border-right-color: currentColor;
+    opacity: 0;
+    letter-spacing: 0.18em;
+    transform: translateY(16px) scale(0.96);
+    clip-path: inset(0 100% 0 0);
+    filter: blur(10px);
   }
 
   100% {
-    border-right-color: transparent;
+    opacity: 1;
+    letter-spacing: 0;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
   }
 }
 
@@ -257,27 +268,10 @@ body {
   animation: cardSettle 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.typewriter-line {
-  display: inline-block;
-  width: 0;
-  opacity: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  vertical-align: bottom;
+.animate-hero-soft-reveal {
+  animation: heroSoftReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
-.animate-typewriter-present {
-  border-right: 2px solid currentColor;
-  padding-right: 0.08em;
-  animation:
-    typePresent 0.9s steps(12, end) 0.12s forwards,
-    caretFade 1.05s step-end 0.12s forwards;
-}
-
-.animate-typewriter-confidence {
-  border-right: 2px solid currentColor;
-  padding-right: 0.08em;
-  animation:
-    typeConfidence 1s steps(10, end) 0.95s forwards,
-    caretFade 1.15s step-end 0.95s forwards;
+.animate-hero-accent-reveal {
+  animation: heroAccentReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
 }

@@ -84,6 +84,7 @@ export default function ScriptInput() {
   const [isExtracting, setIsExtracting] = useState(false);
   const [fileError, setFileError] = useState<string | null>(null);
   const [isAnimatedIn, setIsAnimatedIn] = useState(false);
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -92,7 +93,14 @@ export default function ScriptInput() {
       setIsAnimatedIn(true);
     }, 80);
 
-    return () => window.clearTimeout(timeoutId);
+    const cleanupId = window.setTimeout(() => {
+      setIsIntroComplete(true);
+    }, 1600);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearTimeout(cleanupId);
+    };
   }, []);
 
   const getRevealClass = (
@@ -100,7 +108,7 @@ export default function ScriptInput() {
     variant: "fade" | "rise" | "card" = "fade"
   ) => {
     const base =
-      "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform";
+      "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform";
     const hidden =
       variant === "card"
         ? "opacity-0 translate-y-5 scale-[0.985]"
@@ -110,10 +118,14 @@ export default function ScriptInput() {
     const shown = "opacity-100 translate-y-0 scale-100";
 
     return {
-      className: `${base} ${isAnimatedIn ? shown : hidden}`,
-      style: {
-        transitionDelay: `${delay}ms`,
-      },
+      className: isIntroComplete
+        ? ""
+        : `${base} ${isAnimatedIn ? shown : hidden}`,
+      style: isIntroComplete
+        ? undefined
+        : {
+            transitionDelay: `${delay}ms`,
+          },
     };
   };
 
@@ -213,15 +225,15 @@ export default function ScriptInput() {
           style={titleReveal.style}
         >
           <span
-            className={`typewriter-line font-cursive text-text mr-3 tracking-normal ${
-              isAnimatedIn ? "animate-typewriter-present" : ""
+            className={`inline-block font-cursive text-text mr-3 tracking-normal ${
+              isAnimatedIn ? "animate-hero-soft-reveal" : "opacity-0"
             }`}
           >
             Present with
           </span>
           <span
-            className={`typewriter-line ${
-              isAnimatedIn ? "animate-typewriter-confidence" : ""
+            className={`inline-block ${
+              isAnimatedIn ? "animate-hero-accent-reveal" : "opacity-0"
             }`}
           >
             <span className="animate-text-shimmer font-black">CONFIDENCE</span>

@@ -17,6 +17,12 @@ export default function ScriptInput() {
     router.push("/analyse");
   };
 
+  const handleSampleScript = () => {
+    setScript(
+      "Good morning everyone. Today, I'd like to share our vision for the future of AI. We believe that artificial intelligence shouldn't just be about automation; it should be about augmentation. Imagine a world where your tools don't just follow instructions, but actually understand your intent. By focusing on human-centric design, we can create systems that empower creativity rather than replacing it. I'm excited to show you what we've been building and how it will transform your daily workflow. Thank you for being here."
+    );
+  };
+
   return (
     <main className="flex-1 mx-auto max-w-2xl px-6 py-8 flex flex-col justify-center">
       <div className="text-center mb-10">
@@ -30,12 +36,20 @@ export default function ScriptInput() {
       </div>
 
       <div className="rounded-xl border border-border bg-surface p-6">
-        <label
-          htmlFor="script-input"
-          className="block text-sm font-medium text-text mb-2"
-        >
-          Your script
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label
+            htmlFor="script-input"
+            className="block text-sm font-medium text-text"
+          >
+            Your script
+          </label>
+          <button
+            onClick={handleSampleScript}
+            className="text-xs font-semibold py-1 px-3 rounded-md bg-secondary text-secondary-foreground border border-border hover:bg-border transition-colors cursor-pointer"
+          >
+            Insert a sample script
+          </button>
+        </div>
         <textarea
           id="script-input"
           value={script}

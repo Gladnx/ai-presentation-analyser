@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 type UploadStepState = "pending" | "active" | "done" | "error";
@@ -83,8 +83,39 @@ export default function ScriptInput() {
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [isExtracting, setIsExtracting] = useState(false);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [isAnimatedIn, setIsAnimatedIn] = useState(false);
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setIsAnimatedIn(true);
+    }, 80);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  const getRevealClass = (
+    delay: number,
+    variant: "fade" | "rise" | "card" = "fade"
+  ) => {
+    const base =
+      "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform";
+    const hidden =
+      variant === "card"
+        ? "opacity-0 translate-y-5 scale-[0.985]"
+        : variant === "rise"
+          ? "opacity-0 translate-y-4 scale-[0.985]"
+          : "opacity-0 translate-y-3";
+    const shown = "opacity-100 translate-y-0 scale-100";
+
+    return {
+      className: `${base} ${isAnimatedIn ? shown : hidden}`,
+      style: {
+        transitionDelay: `${delay}ms`,
+      },
+    };
+  };
 
   const handleAnalyse = () => {
     if (!script.trim() || isExtracting) return;
@@ -160,21 +191,58 @@ export default function ScriptInput() {
       : selectedFileName
         ? "done"
         : "pending";
+  const heroReveal = getRevealClass(0, "fade");
+  const titleReveal = getRevealClass(80, "rise");
+  const copyReveal = getRevealClass(180, "fade");
+  const cardReveal = getRevealClass(240, "card");
+  const headerReveal = getRevealClass(320, "fade");
+  const uploadReveal = getRevealClass(380, "fade");
+  const sampleReveal = getRevealClass(460, "fade");
+  const clearReveal = getRevealClass(540, "fade");
+  const textareaReveal = getRevealClass(430, "fade");
+  const footerReveal = getRevealClass(620, "fade");
 
   return (
     <main className="w-full max-w-2xl flex flex-col justify-center">
-      <div className="text-center mb-6">
-        <h1 className="text-4xl md:text-5xl font-black text-text tracking-tight mb-2 flex flex-col sm:block">
-          <span className="font-cursive text-text mr-3 tracking-normal">Present with</span>
-          <span className="animate-text-shimmer font-black">CONFIDENCE</span>
+      <div
+        className={`text-center mb-6 ${heroReveal.className}`}
+        style={heroReveal.style}
+      >
+        <h1
+          className={`text-4xl md:text-5xl font-black text-text tracking-tight mb-2 flex flex-col sm:block ${titleReveal.className}`}
+          style={titleReveal.style}
+        >
+          <span
+            className={`typewriter-line font-cursive text-text mr-3 tracking-normal ${
+              isAnimatedIn ? "animate-typewriter-present" : ""
+            }`}
+          >
+            Present with
+          </span>
+          <span
+            className={`typewriter-line ${
+              isAnimatedIn ? "animate-typewriter-confidence" : ""
+            }`}
+          >
+            <span className="animate-text-shimmer font-black">CONFIDENCE</span>
+          </span>
         </h1>
-        <p className="text-text-muted text-sm max-w-lg mx-auto leading-relaxed">
+        <p
+          className={`text-text-muted text-sm max-w-lg mx-auto leading-relaxed ${copyReveal.className}`}
+          style={copyReveal.style}
+        >
           The AI powered coach that will help you perfect your script, predict audience questions and answers, and master your presentation mood.
         </p>
       </div>
 
-      <div className="glass rounded-2xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5">
-        <div className="mb-4 flex items-center justify-between gap-3">
+      <div
+        className={`glass rounded-2xl border border-border/50 p-6 md:p-8 shadow-2xl shadow-primary/5 ${cardReveal.className}`}
+        style={cardReveal.style}
+      >
+        <div
+          className={`mb-4 flex items-center justify-between gap-3 ${headerReveal.className}`}
+          style={headerReveal.style}
+        >
           <label
             htmlFor="script-input"
             className="block text-[10px] font-semibold text-text-muted/80 uppercase tracking-[0.25em] ml-1"
@@ -194,7 +262,8 @@ export default function ScriptInput() {
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isExtracting}
-              className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary disabled:cursor-not-allowed disabled:opacity-60"
+              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary disabled:cursor-not-allowed disabled:opacity-60 ${uploadReveal.className}`}
+              style={uploadReveal.style}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +284,8 @@ export default function ScriptInput() {
 
             <button
               onClick={handleSampleScript}
-              className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary ${sampleReveal.className}`}
+              style={sampleReveal.style}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +307,8 @@ export default function ScriptInput() {
             <button
               onClick={handleClear}
               disabled={!script.trim() && !selectedFileName && !fileError}
-              className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-red-500/40 hover:bg-red-500/5 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:text-red-400"
+              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-red-500/40 hover:bg-red-500/5 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:text-red-400 ${clearReveal.className}`}
+              style={clearReveal.style}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +329,10 @@ export default function ScriptInput() {
           </div>
         </div>
 
-        <div className="relative group">
+        <div
+          className={`relative group ${textareaReveal.className}`}
+          style={textareaReveal.style}
+        >
           <textarea
             id="script-input"
             value={script}
@@ -275,7 +349,7 @@ export default function ScriptInput() {
         </div>
 
         {(selectedFileName || fileError) && (
-          <div className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-border bg-surface-alt/60 px-3 py-2">
+          <div className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-border bg-surface-alt/60 px-3 py-2 animate-fade-in-soft">
             {selectedFileName ? (
               <div className="min-w-0 max-w-full flex items-center gap-2 rounded-md bg-primary/8 px-2 py-1 text-[11px] text-text">
                 <svg
@@ -332,7 +406,10 @@ export default function ScriptInput() {
           </div>
         )}
 
-        <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div
+          className={`mt-5 flex flex-col sm:flex-row items-center justify-between gap-4 ${footerReveal.className}`}
+          style={footerReveal.style}
+        >
           <div className="flex items-center gap-2 text-text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-primary/60" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />

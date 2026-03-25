@@ -17,7 +17,7 @@ export default function QuestionList({ questions }: { questions: QuestionItem[] 
   };
 
   return (
-    <div className="rounded-2xl border border-border/50 glass p-8 animate-fade-in-up shadow-xl shadow-primary/5" style={{ animationDelay: '0.4s' }}>
+    <div className="rounded-2xl border border-border/50 glass p-8 shadow-xl shadow-primary/5">
       <h3 className="text-sm font-black text-text mb-6 flex items-center gap-3 uppercase tracking-widest">
         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="currentColor">

@@ -9,6 +9,50 @@ import ImprovementList from "@/components/ImprovementList";
 import QuestionList from "@/components/QuestionList";
 import { AnalysisResult } from "@/types/analysis";
 
+function ResultsSkeleton() {
+  return (
+    <div className="space-y-8 animate-fade-in-up">
+      <div className="grid grid-cols-2 gap-6">
+        {[0, 1].map((idx) => (
+          <div
+            key={idx}
+            className="rounded-2xl border border-border/50 glass p-6 h-[220px] shadow-xl shadow-primary/5 animate-pulse"
+          >
+            <div className="h-3 w-28 rounded-full bg-border/70 mx-auto mb-8" />
+            <div className="flex h-[140px] items-center justify-center">
+              <div className="h-28 w-28 rounded-full border border-border/60 bg-surface-alt/70" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-2xl border border-border/50 glass p-8 shadow-xl shadow-primary/5 animate-pulse">
+        <div className="h-4 w-48 rounded-full bg-border/70 mb-6" />
+        <div className="space-y-4">
+          {[0, 1, 2].map((idx) => (
+            <div
+              key={idx}
+              className="h-16 rounded-xl border border-border/50 bg-surface-alt/60"
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-border/50 glass p-8 shadow-xl shadow-primary/5 animate-pulse">
+        <div className="h-4 w-56 rounded-full bg-border/70 mb-6" />
+        <div className="space-y-4">
+          {[0, 1, 2].map((idx) => (
+            <div
+              key={idx}
+              className="h-20 rounded-xl border border-border/50 bg-surface-alt/60"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AnalysePage() {
   const router = useRouter();
   const [script, setScript] = useState<string | null>(null);
@@ -145,13 +189,7 @@ export default function AnalysePage() {
           <h2 className="text-xl font-bold text-text mb-2 uppercase tracking-widest text-sm">Analysis Results</h2>
 
           {loading && !isEditing ? (
-            <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] text-text-muted gap-6 glass rounded-2xl border border-border/50">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 border-4 border-primary/10 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
-              </div>
-              <p className="animate-pulse font-bold tracking-widest text-xs uppercase text-primary/80">Analysing Presence...</p>
-            </div>
+            <ResultsSkeleton />
           ) : error ? (
             <div className="glass border border-red-500/20 rounded-2xl p-8 text-red-600 dark:text-red-400 flex flex-col items-center justify-center min-h-[400px] gap-6 shadow-xl">
               <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
@@ -168,7 +206,7 @@ export default function AnalysePage() {
               </button>
             </div>
           ) : result ? (
-            <div className={`space-y-8 ${loading ? "opacity-40 pointer-events-none grayscale-[0.5] transition-all duration-500" : "transition-all duration-500"}`}>
+            <div className="space-y-8 transition-opacity duration-300 animate-fade-in-soft">
               {/* score and mood */}
               <div className="grid grid-cols-2 gap-6">
                 <ScoreCard score={result.score} />

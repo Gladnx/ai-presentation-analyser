@@ -144,6 +144,77 @@ body {
   }
 }
 
+@keyframes fadeInSoft {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardSettle {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    box-shadow: 0 0 0 rgba(220, 38, 38, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 20px 45px rgba(220, 38, 38, 0.08);
+  }
+}
+
+@keyframes typePresent {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+
+  to {
+    width: 12ch;
+    opacity: 1;
+  }
+}
+
+@keyframes typeConfidence {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+
+  to {
+    width: 10.5ch;
+    opacity: 1;
+  }
+}
+
+@keyframes caretFade {
+  0%,
+  85% {
+    border-right-color: currentColor;
+  }
+
+  100% {
+    border-right-color: transparent;
+  }
+}
+
 /* Text shimmer animation */
 @keyframes textShimmer {
   0% {
@@ -172,4 +243,41 @@ body {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-soft {
+  animation: fadeInSoft 0.7s ease forwards;
+}
+
+.animate-rise-in {
+  animation: riseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-card-settle {
+  animation: cardSettle 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.typewriter-line {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.animate-typewriter-present {
+  border-right: 2px solid currentColor;
+  padding-right: 0.08em;
+  animation:
+    typePresent 0.9s steps(12, end) 0.12s forwards,
+    caretFade 1.05s step-end 0.12s forwards;
+}
+
+.animate-typewriter-confidence {
+  border-right: 2px solid currentColor;
+  padding-right: 0.08em;
+  animation:
+    typeConfidence 1s steps(10, end) 0.95s forwards,
+    caretFade 1.15s step-end 0.95s forwards;
 }

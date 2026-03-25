@@ -23,7 +23,7 @@ export default function ScoreCard({ score }: { score: number }) {
   const theme = getThemeClasses();
 
   return (
-    <div className="rounded-2xl border border-border/50 glass p-6 flex flex-col items-center animate-fade-in-up h-full shadow-xl shadow-primary/5" style={{ animationDelay: '0.1s' }}>
+    <div className="rounded-2xl border border-border/50 glass p-6 flex flex-col items-center h-full shadow-xl shadow-primary/5">
       <h3 className="text-[10px] font-black text-text-muted mb-6 uppercase tracking-[0.2em] w-full text-center opacity-70">Overall Score</h3>
       <div className={`relative w-28 h-28 rounded-full border-2 ${theme.ring} flex items-center justify-center transition-all duration-500`}>
         <div className={`w-22 h-22 rounded-full border-2 ${theme.border} ${theme.bg} flex flex-col items-center justify-center shadow-lg`}>

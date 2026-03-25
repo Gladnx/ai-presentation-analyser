@@ -18,14 +18,20 @@ export async function analyseScript(script: string): Promise<AnalysisResult> {
   "score": <number 1-10>,
   "mood": "<one or two word mood, e.g. Informative, Persuasive, Humorous, Inspirational>",
   "improvements": ["<suggestion 1>", "<suggestion 2>", "<suggestion 3>"],
-  "questions": ["<question 1>", "<question 2>", "<question 3>", "<question 4>", "<question 5>"]
+  "questions": [
+    { "question": "<question 1>", "answer": "<suggested response 1>" },
+    { "question": "<question 2>", "answer": "<suggested response 2>" },
+    { "question": "<question 3>", "answer": "<suggested response 3>" },
+    { "question": "<question 4>", "answer": "<suggested response 4>" },
+    { "question": "<question 5>", "answer": "<suggested response 5>" }
+  ]
 }
 
 Rules:
 - score: rate the script quality from 1 (poor) to 10 (excellent)
 - mood: identify the primary tone/mood in 1-2 words
 - improvements: provide 3-5 specific, actionable improvement suggestions
-- questions: provide exactly 5 questions the audience might ask after the presentation
+- questions: provide exactly 5 questions the audience might ask, each paired with a suggested "best practice" answer or response strategy
 - Return ONLY the JSON object, nothing else`,
       },
       {

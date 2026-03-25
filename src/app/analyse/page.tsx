@@ -121,17 +121,17 @@ export default function AnalysePage() {
     <div className="min-h-screen bg-mesh flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8 flex flex-col lg:flex-row gap-8 animate-fade-in-up">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6 sm:px-6 sm:py-8 flex flex-col lg:flex-row gap-6 sm:gap-8 animate-fade-in-up">
         {/* Left Column: Script View/Edit */}
         <div className="flex-1 flex flex-col lg:border-r border-border lg:pr-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex flex-col gap-3 max-[400px]:items-start sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-bold text-text uppercase tracking-widest text-sm">Your Script</h2>
-            <div className="flex items-center gap-3">
+            <div className="flex w-full flex-col gap-2 min-[401px]:w-auto min-[401px]:flex-row min-[401px]:items-center min-[401px]:gap-3">
               {!isEditing ? (
                 <>
                   <button
                     onClick={handleEditToggle}
-                    className="text-xs font-bold text-text-muted hover:text-primary transition-colors px-4 py-2 rounded-xl hover:bg-surface border border-transparent hover:border-border uppercase tracking-wider"
+                    className="w-full min-[401px]:w-auto text-xs font-bold text-text-muted hover:text-primary transition-colors px-4 py-2 rounded-xl hover:bg-surface border border-transparent hover:border-border uppercase tracking-wider"
                   >
                     Edit Script
                   </button>
@@ -140,7 +140,7 @@ export default function AnalysePage() {
                       sessionStorage.removeItem("presentation_script");
                       router.push("/");
                     }}
-                    className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 px-5 py-2.5 text-xs font-black text-white hover:scale-[1.02] transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 shadow-lg shadow-red-500/20 animate-shimmer uppercase tracking-widest"
+                    className="inline-flex w-full min-[401px]:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 px-5 py-2.5 text-xs font-black text-white hover:scale-[1.02] transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 shadow-lg shadow-red-500/20 animate-shimmer uppercase tracking-widest"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -149,17 +149,17 @@ export default function AnalysePage() {
                   </button>
                 </>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex w-full flex-col gap-2 min-[401px]:w-auto min-[401px]:flex-row min-[401px]:items-center">
                   <button
                     onClick={handleEditToggle}
-                    className="text-xs font-bold text-text-muted hover:text-text px-4 py-2 transition-colors uppercase tracking-wider"
+                    className="w-full min-[401px]:w-auto text-xs font-bold text-text-muted hover:text-text px-4 py-2 transition-colors uppercase tracking-wider"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleReAnalyse}
                     disabled={loading || !editedScript.trim()}
-                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-xs font-black text-white hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50 shadow-lg shadow-primary/20 animate-shimmer uppercase tracking-widest"
+                    className="inline-flex w-full min-[401px]:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-xs font-black text-white hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50 shadow-lg shadow-primary/20 animate-shimmer uppercase tracking-widest"
                   >
                     {loading ? "Analysing..." : "Re-analyse"}
                   </button>
@@ -208,7 +208,7 @@ export default function AnalysePage() {
           ) : result ? (
             <div className="space-y-8 transition-opacity duration-300 animate-fade-in-soft">
               {/* score and mood */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 min-[401px]:gap-6 max-[400px]:grid-cols-1">
                 <ScoreCard score={result.score} />
                 <MoodBadge mood={result.mood} />
               </div>

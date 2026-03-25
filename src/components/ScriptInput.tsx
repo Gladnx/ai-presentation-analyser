@@ -252,12 +252,12 @@ export default function ScriptInput() {
         style={cardReveal.style}
       >
         <div
-          className={`mb-4 flex items-center justify-between gap-3 ${headerReveal.className}`}
+          className={`mb-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between ${headerReveal.className}`}
           style={headerReveal.style}
         >
           <label
             htmlFor="script-input"
-            className="block text-[10px] font-semibold text-text-muted/80 uppercase tracking-[0.25em] ml-1"
+            className="block text-[10px] font-semibold text-text-muted/80 uppercase tracking-[0.25em] sm:ml-1"
           >
             Your Script or File
           </label>
@@ -270,11 +270,11 @@ export default function ScriptInput() {
             className="hidden"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="grid w-full grid-cols-3 gap-2 sm:flex sm:w-auto sm:items-center">
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isExtracting}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary disabled:cursor-not-allowed disabled:opacity-60 ${uploadReveal.className}`}
+              className={`inline-flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-2.5 py-2 text-[9px] font-black uppercase tracking-[0.14em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-3 sm:text-[10px] sm:tracking-[0.18em] ${uploadReveal.className}`}
               style={uploadReveal.style}
             >
               <svg
@@ -291,12 +291,12 @@ export default function ScriptInput() {
                   d="M12 16V4m0 0l-4 4m4-4l4 4M4 16.5V18a2 2 0 002 2h12a2 2 0 002-2v-1.5"
                 />
               </svg>
-              <span>{isExtracting ? "Reading" : "Upload"}</span>
+              <span className="truncate">{isExtracting ? "Reading" : "Upload"}</span>
             </button>
 
             <button
               onClick={handleSampleScript}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary ${sampleReveal.className}`}
+              className={`inline-flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-2.5 py-2 text-[9px] font-black uppercase tracking-[0.14em] text-text-muted transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary sm:w-auto sm:px-3 sm:text-[10px] sm:tracking-[0.18em] ${sampleReveal.className}`}
               style={sampleReveal.style}
             >
               <svg
@@ -313,13 +313,13 @@ export default function ScriptInput() {
                   d="M8 7h8M8 12h8m-8 5h5M7 3h10a2 2 0 012 2v14l-4-2-4 2-4-2-4 2V5a2 2 0 012-2z"
                 />
               </svg>
-              <span>Sample</span>
+              <span className="truncate">Sample</span>
             </button>
 
             <button
               onClick={handleClear}
               disabled={!script.trim() && !selectedFileName && !fileError}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-text-muted transition-all hover:border-red-500/40 hover:bg-red-500/5 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:text-red-400 ${clearReveal.className}`}
+              className={`inline-flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-alt px-2.5 py-2 text-[9px] font-black uppercase tracking-[0.14em] text-text-muted transition-all hover:border-red-500/40 hover:bg-red-500/5 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:text-red-400 sm:w-auto sm:px-3 sm:text-[10px] sm:tracking-[0.18em] ${clearReveal.className}`}
               style={clearReveal.style}
             >
               <svg
@@ -336,7 +336,7 @@ export default function ScriptInput() {
                   d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-7 0l1 12h6l1-12M10 11v6m4-6v6"
                 />
               </svg>
-              <span>Clear</span>
+              <span className="truncate">Clear</span>
             </button>
           </div>
         </div>

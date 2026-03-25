@@ -16,11 +16,11 @@ export default function MoodBadge({ mood }: { mood: string }) {
   const config = getMoodConfig();
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-6 flex flex-col items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-      <h3 className="text-xs font-bold text-text-muted mb-6 uppercase tracking-[0.2em]">Detected Mood</h3>
-      <div className="h-25 flex items-center justify-center w-full">
-        <div className={`px-8 py-4 rounded-2xl flex items-center justify-center border shadow-lg transition-all duration-300 ${config.color}`}>
-          <span className="font-black text-xl leading-tight uppercase tracking-widest text-center">
+    <div className="rounded-xl border border-border bg-surface p-6 flex flex-col items-center animate-fade-in-up h-full" style={{ animationDelay: '0.2s' }}>
+      <h3 className="text-xs font-bold text-text-muted mb-6 uppercase tracking-[0.2em] w-full text-center">Detected Mood</h3>
+      <div className="flex-1 flex items-center justify-center w-full">
+        <div className={`px-6 py-2.5 rounded-xl flex items-center justify-center border shadow-md transition-all duration-300 ${config.color}`}>
+          <span className="font-extrabold text-base leading-tight uppercase tracking-widest text-center">
             {mood}
           </span>
         </div>

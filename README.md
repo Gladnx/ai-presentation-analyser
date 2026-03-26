@@ -90,7 +90,44 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) to see the magic.
 
 ---
-## ⚡ Final Note
+## Example Input and Output
 
-Built with a focus on clarity, performance, and real-world usability
-because great ideas deserve great delivery.
+### Example Input
+```text
+Good morning everyone. Today, I'd like to share our vision for the future of AI. We believe that artificial intelligence shouldn't just be about automation; it should be about augmentation. Imagine a world where your tools don't just follow instructions, but actually understand your intent. By focusing on human-centric design, we can create systems that empower creativity rather than replacing it. I'm excited to show you what we've been building and how it will transform your daily workflow. Thank you for being here.
+```
+
+### Example Output
+```json
+{
+  "score": 4,
+  "mood": "Inspirational",
+  "improvements": [
+    "Add more specific examples to illustrate the concept of human-centric design and its benefits",
+    "Provide a clearer definition of what is meant by 'augmentation' and how it differs from automation",
+    "Include more details about the systems that have been built and how they will transform daily workflows"
+  ],
+  "questions": [
+    {
+      "question": "What exactly do you mean by 'human-centric design'?",
+      "answer": "Provide a concise definition and example of how this approach has been applied in your project"
+    },
+    {
+      "question": "How does your approach to AI differ from what others are doing in the field?",
+      "answer": "Be prepared to discuss your unique value proposition and what sets your work apart"
+    },
+    {
+      "question": "Can you give us a concrete example of how your system will 'empower creativity'?",
+      "answer": "Use a specific scenario or case study to demonstrate the potential impact of your technology"
+    },
+    {
+      "question": "What kind of timeline are we looking at for the rollout of these new systems?",
+      "answer": "Provide a general outline of your development and deployment plans, even if exact dates are not yet available"
+    },
+    {
+      "question": "How will these new systems be integrated into our existing workflows?",
+      "answer": "Discuss any plans for training, support, or other resources that will be available to help users adapt to the new technology"
+    }
+  ]
+}
+```

@@ -237,13 +237,12 @@ export default function ScriptInput() {
           </span>
         </h1>
         <p
-          className={`text-text-muted text-sm max-w-lg mx-auto leading-relaxed ${
-            isAnimatedIn ? "animate-hero-copy-reveal" : "opacity-0"
-          }`}
+          className={`text-text-muted text-sm max-w-lg mx-auto leading-relaxed ${isAnimatedIn ? "animate-hero-copy-reveal" : "opacity-0"
+            }`}
         >
           Your AI presentation coach for your{" "}
           <span className="font-bold text-primary">
-            Lancaster student journey
+            presentation journey
           </span>
           , that will help you perfect your{" "}
           <span className="font-bold text-primary">presentation script</span>,{" "}

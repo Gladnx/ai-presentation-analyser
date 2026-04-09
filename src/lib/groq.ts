@@ -44,20 +44,47 @@ export async function analyseScript(script: string): Promise<AnalysisResult> {
   "score": <number 1-10>,
   "mood": "<one or two word mood, e.g. Informative, Persuasive, Humorous, Inspirational>",
   "improvements": ["<suggestion 1>", "<suggestion 2>", "<suggestion 3>"],
-  "questions": [
-    { "question": "<question 1>", "answer": "<suggested response 1>" },
-    { "question": "<question 2>", "answer": "<suggested response 2>" },
-    { "question": "<question 3>", "answer": "<suggested response 3>" },
-    { "question": "<question 4>", "answer": "<suggested response 4>" },
-    { "question": "<question 5>", "answer": "<suggested response 5>" }
-  ]
+  "questions": {
+    "beginner": [
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" }
+    ],
+    "intermediate": [
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" }
+    ],
+    "expert": [
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" }
+    ],
+    "mixed": [
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" },
+      { "question": "<question>", "answer": "<suggested response>" }
+    ]
+  }
 }
 
 Rules:
 - score: rate the script quality from 1 (poor) to 10 (excellent)
 - mood: identify the primary tone/mood in 1-2 words
 - improvements: provide 3-5 specific, actionable improvement suggestions
-- questions: provide exactly 5 questions the audience might ask, each paired with a suggested "best practice" answer or response strategy
+- questions: provide exactly 5 questions per audience level, each paired with a suggested "best practice" answer or response strategy
+  - "beginner": questions from an audience with NO prior knowledge of the topic. These should be simple, clarifying, foundational questions.
+  - "intermediate": questions from an audience with SOME knowledge. These should probe deeper into reasoning, comparisons, and practical implications.
+  - "expert": questions from an audience who are SPECIALISTS in the topic. These should be challenging, technical, or critical questions.
+  - "mixed": questions from a DIVERSE audience with varied knowledge levels. Include a realistic blend of simple and complex questions.
 - Evaluate quality based on both writing quality and completeness of content
 - Short or underdeveloped scripts must be scored more conservatively than complete scripts
 - If the script lacks enough content, say so indirectly through the score, improvements, and likely questions
@@ -88,7 +115,11 @@ ${script}`,
     typeof parsed.score !== "number" ||
     typeof parsed.mood !== "string" ||
     !Array.isArray(parsed.improvements) ||
-    !Array.isArray(parsed.questions)
+    typeof parsed.questions !== "object" ||
+    !Array.isArray(parsed.questions.beginner) ||
+    !Array.isArray(parsed.questions.intermediate) ||
+    !Array.isArray(parsed.questions.expert) ||
+    !Array.isArray(parsed.questions.mixed)
   ) {
     throw new Error("Invalid response structure from Groq");
   }

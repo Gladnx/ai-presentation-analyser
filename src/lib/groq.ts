@@ -126,3 +126,46 @@ ${script}`,
 
   return parsed;
 }
+
+export async function rewriteScript(
+  script: string,
+  improvements: string[]
+): Promise<string> {
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    temperature: 0.5,
+    messages: [
+      {
+        role: "system",
+        content: `You are a professional presentation script editor. The user will provide their original presentation script along with a list of improvement suggestions.
+
+Your task is to rewrite the script incorporating ALL the improvement suggestions while:
+- Preserving the speaker's original voice, tone, and intent
+- Maintaining the same general structure and flow
+- Keeping a similar length (you may expand slightly if needed for clarity)
+- Making the script sound natural and ready to deliver
+- Improving transitions, clarity, and impact
+
+Return ONLY the rewritten script text. No explanations, no markdown, no labels — just the improved script ready to be read aloud.`,
+      },
+      {
+        role: "user",
+        content: `Original Script:
+${script}
+
+Improvement Suggestions to incorporate:
+${improvements.map((item, i) => `${i + 1}. ${item}`).join("\n")}
+
+Please rewrite the script incorporating these improvements.`,
+      },
+    ],
+  });
+
+  const content = completion.choices[0]?.message?.content;
+
+  if (!content) {
+    throw new Error("No response from Groq");
+  }
+
+  return content.trim();
+}
